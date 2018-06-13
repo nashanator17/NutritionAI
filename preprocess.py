@@ -29,7 +29,9 @@ else:
 center = (w // 2, h // 2)
 M = cv2.getRotationMatrix2D(center, angle, 1.0)
 rotated = cv2.warpAffine(image, M, (w, h), flags=cv2.INTER_CUBIC, borderMode=cv2.BORDER_REPLICATE)
+# write image
+cv2.imwrite('processed.png',rotated)
 # show image
-cv2.imshow("image",rotated)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+#cv2.imshow("image",rotated)
+#cv2.waitKey(0)
+#cv2.destroyAllWindows()

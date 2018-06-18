@@ -27,7 +27,7 @@ def detect_text(path):
         parsed += ('\n"{}"'.format(text.description))
 
     format_text(parsed)
-    
+
 
 def process_image():
 
@@ -74,7 +74,7 @@ def format_text(text):
 
     return result
     # file = open('result.txt','w')
-    # file.write(result) 
-    # file.close() 
+    # file.write(result)
+    # file.close()
 
 process_image()

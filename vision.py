@@ -76,5 +76,3 @@ def format_text(text):
     # file = open('result.txt','w')
     # file.write(result) 
     # file.close() 
-
-process_image()

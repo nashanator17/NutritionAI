@@ -14,6 +14,7 @@ import json
 from pprint import pprint
 import argparse
 import customerInfo
+import vision
 
 ap = argparse.ArgumentParser()
 ap.add_argument("--age", required = True, help = "Enter your age")
@@ -33,19 +34,22 @@ healthLabels = set()
 
 # Call placeholder methods
 # Return json
-with open("ruffles.json") as f:
-    data = json.load(f)
+#with open("ruffles.json") as f:
+    #data = json.load(f)
 #
 # r1context = .content
 # text = json.loads(r1content)
-mainstring = data["textAnnotations"][0]["description"]
-mainstring = mainstring.replace("\n","%20")
-mainstring = mainstring.replace("&amp","and")
-mainstring = mainstring.replace(" ","%20")
+# mainstring = data["textAnnotations"][0]["description"]
+# mainstring = mainstring.replace("\n","%20")
+# mainstring = mainstring.replace("&amp","and")
+# mainstring = mainstring.replace(" ","%20")
 
 #print(mainstring)
 #ingredient = "ruffles"
-url = "https://api.edamam.com/api/food-database/parser?ingr="+mainstring+"&app_id=b354c614&app_key=f192339adb7c913344e77f7c4f4a65c0&page=1"
+
+mainstring = vision.process_image()
+print("mainstring "+ str(mainstring))
+url = "https://api.edamam.com/api/food-database/parser?ingr="+str(mainstring)+"&app_id=b354c614&app_key=f192339adb7c913344e77f7c4f4a65c0&page=1"
 
 # print(url)
 #

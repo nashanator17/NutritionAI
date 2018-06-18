@@ -26,7 +26,8 @@ def detect_text(path):
     for text in texts:
         parsed += ('\n"{}"'.format(text.description))
 
-    format_text(parsed)
+    # print (format_text(parsed))
+    return parsed
     
 
 def process_image():
@@ -54,7 +55,8 @@ def process_image():
             print("image taken, processing results...")
             # Instantiates a client
             client = vision.ImageAnnotatorClient()
-            detect_text(img_name)
+            return img_name
+        
 
     cam.release()
     cv2.destroyAllWindows()
@@ -76,3 +78,9 @@ def format_text(text):
     # file = open('result.txt','w')
     # file.write(result) 
     # file.close() 
+
+def run():
+    img_name = process_image()
+    parsed = detect_text(img_name)
+    result = format_text(parsed)
+    return result

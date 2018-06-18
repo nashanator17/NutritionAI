@@ -14,13 +14,16 @@ image = cv2.imread(args["image"],0)
 # Create mask
 mask = np.ones(image.shape[:2], dtype="uint8") * 255
 # Adaptive threshold
-image = cv2.adaptiveThreshold(image,255,cv2.ADAPTIVE_THRESH_MEAN_C,cv2.THRESH_BINARY,11,2)
+image = cv2.adaptiveThreshold(image,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C,cv2.THRESH_BINARY,11,2)
+# Global threshold
+# ret, image = cv2.threshold(image,127,255,cv2.THRESH_BINARY)
 # Binary flip image for erosion and dilation
 image = cv2.bitwise_not(image)
 # Erode and Dilatee iteratively
-for i in range (30):
-    
+for i in range (1):
+    # Create a kernel of size 2x2
     kernel = np.ones((2,2),np.uint8)
+    
     image = cv2.erode(image,kernel,iterations = 1)
     image = cv2.dilate(image,kernel,iterations = 1)
     

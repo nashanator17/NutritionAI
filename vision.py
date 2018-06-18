@@ -21,13 +21,28 @@ def detect_text(path):
     response = client.text_detection(image=image)
     texts = response.text_annotations #Print this to view returned data
 
-    parsed = ""
+    parsed = {}
+    resultString = ""
 
     for text in texts:
-        parsed += ('\n"{}"'.format(text.description))
+        #parsed += ('\n"{}"'.format(text.description))
+        area = ((text.bounding_poly.vertices[2].x - text.bounding_poly.vertices[0].x) * (text.bounding_poly.vertices[2].y - text.bounding_poly.vertices[0].y))
+        temp = {area:text.description}
+        parsed.update(temp)
+        # print(text.bounding_poly.vertices[0].x)
 
     # print (format_text(parsed))
-    return parsed
+    keylist = sorted(parsed)
+    keylist = list(reversed(keylist))
+    limit = 1
+    for key in keylist:
+        resultString += " "+str(parsed[key])
+        limit+=1
+        if (limit > 5):
+            break
+
+    print(resultString)
+    return resultString
     
 
 def process_image():

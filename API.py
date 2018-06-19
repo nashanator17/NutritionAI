@@ -47,7 +47,7 @@ healthLabels = set()
 #print(mainstring)
 #ingredient = "ruffles"
 
-mainstring = vision.process_image()
+mainstring = vision.run()
 print("mainstring "+ str(mainstring))
 url = "https://api.edamam.com/api/food-database/parser?ingr="+str(mainstring)+"&app_id=b354c614&app_key=f192339adb7c913344e77f7c4f4a65c0&page=1"
 
@@ -70,17 +70,18 @@ content = r2.content
 data = json.loads(content)
 
 foodCalories = data["calories"]
-if data["totalNutrients"]["PROCNT"]["quantity"] is None:
+#print(data["totalNutrients"]["PROCNT"])
+if "PROCNT" not in data["totalNutrients"].keys():
     foodProtein =  0
 else :
     foodProtein = data["totalNutrients"]["PROCNT"]["quantity"]
 
-if data["totalNutrients"]["FAT"]["quantity"] is None:
+if "FAT" not in data["totalNutrients"].keys():
     foodFat =  0
 else :
     foodFat = data["totalNutrients"]["FAT"]["quantity"]
 
-if data["totalNutrients"]["CHOCDF"]["quantity"] is None:
+if "CHOCDF" not in data["totalNutrients"].keys():
     foodCarbs =  0
 else :
     foodCarbs = data["totalNutrients"]["CHOCDF"]["quantity"]

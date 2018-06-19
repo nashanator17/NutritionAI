@@ -36,14 +36,15 @@ def detect_text(path):
     keylist = list(reversed(keylist))
     limit = 1
     for key in keylist:
-        resultString += " "+str(parsed[key])
+        if limit != 1:
+            resultString += str(parsed[key]) + " "
         limit+=1
-        if (limit > 5):
+        if (limit > 6):
             break
 
-    print(resultString)
+    print("vision " + resultString)
     return resultString
-    
+
 
 def process_image():
 
@@ -71,12 +72,13 @@ def process_image():
             # Instantiates a client
             client = vision.ImageAnnotatorClient()
             return img_name
-        
+
 
     cam.release()
     cv2.destroyAllWindows()
 
 def format_text(text):
+    print("format input" + text)
     stripNewLine = text.replace('\n', " ")
     finalString = stripNewLine.replace('"',"")
     # print (finalString)
@@ -91,8 +93,8 @@ def format_text(text):
 
     return result
     # file = open('result.txt','w')
-    # file.write(result) 
-    # file.close() 
+    # file.write(result)
+    # file.close()
 
 def run():
     img_name = process_image()

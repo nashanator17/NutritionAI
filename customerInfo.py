@@ -1,5 +1,4 @@
-def calculate(age, weight, height, exerciseLevel):
-    gender = 'male'
+def calculate(gender, age, weight, height, exerciseLevel):
     goal = 'lose'
     BMR = 0
 

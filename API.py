@@ -17,18 +17,20 @@ import customerInfo
 import vision
 
 ap = argparse.ArgumentParser()
+ap.add_argument("--gender", required = True, help = "Enter your gender")
 ap.add_argument("--age", required = True, help = "Enter your age")
 ap.add_argument("--weight", required = True, help = "Enter your weight in pounds")
 ap.add_argument("--height", required = True, help = "Enter your height in centimeters")
 ap.add_argument("--exercise", required = True, help = "Enter your exercise level (low, light, moderate, heavy)")
 args = vars(ap.parse_args())
 
+gender = float(args["gender"])
 height = float(args["height"])
 weight = float(args["weight"])
 age = float(args["age"])
 exerciseLevel = args["exercise"]
 
-customerData = customerInfo.calculate(age, weight, height, exerciseLevel)
+customerData = customerInfo.calculate(gender, age, weight, height, exerciseLevel)
 
 healthLabels = set()
 

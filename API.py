@@ -24,26 +24,14 @@ ap.add_argument("--weight", required = True, help = "Enter your weight in pounds
 ap.add_argument("--height", required = True, help = "Enter your height in centimeters")
 ap.add_argument("--exercise", required = True, help = "Enter your exercise level (low, light, moderate, heavy)")
 args = vars(ap.parse_args())
-gender = float(args["gender"])
+gender = args["gender"]
 height = float(args["height"])
 weight = float(args["weight"])
 age = float(args["age"])
 exerciseLevel = args["exercise"]
-customerData = customerInfo.calculate(age, weight, height, exerciseLevel)
+customerData = customerInfo.calculate(gender, age, weight, height, exerciseLevel)
 healthLabels = set()
-# Call placeholder methods
-# Return json
-#with open("ruffles.json") as f:
-    #data = json.load(f)
-#
-# r1context = .content
-# text = json.loads(r1content)
-# mainstring = data["textAnnotations"][0]["description"]
-# mainstring = mainstring.replace("\n","%20")
-# mainstring = mainstring.replace("&amp","and")
-# mainstring = mainstring.replace(" ","%20")
-#print(mainstring)
-#ingredient = "ruffles"
+
 mainstring = vision.run()
 urlify = mainstring.replace(' ',"%20")
 print("mainstring "+ str(urlify))
@@ -52,16 +40,21 @@ url = "https://api.edamam.com/api/food-database/parser?ingr="+str(urlify)+"&app_
 #
 r = requests.get(url)
 print(mainstring)
-mainstring_format = mainstring.split()[0]
-print(brandName)
+mainstring_set = mainstring.lower().split(" ")
+mainstring_set.sort()
+mainstring_format = ' '.join(mainstring_set)
+print(mainstring_format)
 #print(r.text)
 bestPerc = 0
 bestMatch = ""
 bestFoodLabel = ""
 for food in r.json()["hints"]:
     food_label = food["food"]["label"]
-    perc = similar(food_label.split()[0], brandName)
-    print(str(perc) + " " + food_label.split()[0])
+    foodlabel_set = food_label.lower().split(" ")
+    foodlabel_set.sort()
+    foodlabel_format = ' '.join(foodlabel_set)
+    perc = similar(foodlabel_format, mainstring_format)
+    print(str(perc) + " " + foodlabel_format)
     if perc > bestPerc:
         bestPerc = perc
         bestMatch = food["food"]["uri"]

@@ -87,11 +87,10 @@ def format_text(text):
     words = finalString.split()
     final = " ".join(sorted(set(words), key=words.index))
     # print (final)
-    result = final.replace(' ',"%20")
 
     #print (result)
 
-    return result
+    return final
     # file = open('result.txt','w')
     # file.write(result)
     # file.close()

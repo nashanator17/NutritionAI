@@ -26,4 +26,5 @@ model = app.models.get('food-items-v1.0')
 image = CImage(url='https://samples.clarifai.com/food.jpg')
 
 #output this to JSON
-print(model.predict([image]))
+with open ('./output_data/results.json', 'w') as f:
+    json.dump(model.predict([image]),f)

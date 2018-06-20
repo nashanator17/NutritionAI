@@ -2,7 +2,6 @@ import io
 import os
 import google
 import cv2
-import barcode
 
 # Imports the Google Cloud client library
 from google.cloud import vision
@@ -98,8 +97,6 @@ def format_text(text):
 
 def run():
     img_name = process_image()
-    # parsed = detect_text(img_name)
-    product_barcode = barcode.get_barcode(img_name)
-    product_name = barcode.product_from_barcode(product_barcode)
-    result = format_text(product_name)
+    parsed = detect_text(img_name)
+    result = format_text(parsed)
     return result

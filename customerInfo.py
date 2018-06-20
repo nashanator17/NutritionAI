@@ -1,21 +1,24 @@
-def calculate(gender, age, weight, height, exerciseLevel):
-    goal = 'lose'
+def calculate(infoMap):
+    list_of_restrictions = set()
+    if infoMap["restrictions"] == "yes":
+        input = raw_input("list your allergies separated by commas")
+        list_of_allergies = set(input.split(","))
     BMR = 0
 
     exerciseMap = {"low":1.2,"light":1.375,"moderate":1.55,"heavy":1.725}
     goalMap = {"lose":-0.2,"maintain":1,"gain":0.2}
 
     #BMR Calculation
-    if gender == "male":
-        BMR = 66.47 + (13.75 * weight) + (5.0 * height) - (6.75 * age)
+    if infoMap["gender"] == "male":
+        BMR = 66.47 + (13.75 * infoMap["weight"]) + (5.0 * infoMap["height"]) - (6.75 * infoMap["age"])
     else:
-        BMR = 665.09 + (9.56 * weight) + (1.84 * height) - (4.67 * age)
+        BMR = 665.09 + (9.56 * infoMap["weight"]) + (1.84 * infoMap["height"]) - (4.67 * infoMap["age"])
 
-    BMR *= exerciseMap[exerciseLevel]
-    BMR = BMR + (BMR * goalMap[goal])
+    BMR *= exerciseMap[infoMap["exerciseLevel"]]
+    BMR = BMR + (BMR * goalMap[infoMap["goal"]])
 
     calories = BMR
-    protein = weight * 0.825
+    protein = infoMap["weight"] * 0.825
     fat = BMR * 0.25 / 9.0
     carbs = (BMR - protein - fat) / 4.0
 

@@ -17,7 +17,7 @@ def post():
 
 
     model = app.models.get('food-items-v1.0')
-    image = CImage(file_obj=open('./Images/waffles.jpg', 'rb'))
+    image = CImage(file_obj=open('./Images/chicken.jpg', 'rb'))
 
     #output this to JSON
     with open ('./output_data/results.json', 'w') as f:
@@ -31,16 +31,14 @@ def process():
         data = json.load(results)
 
     mealArr = []
-    #Get top 10 ingredients, return those with threshold > 85%
+    mealDict = {}
+    
+    #Get top 10 ingredients, return those with threshold > 82.5%
     for i in range(10):
         
         if data["outputs"][0]["data"]["concepts"][i]["value"]>0.825:
             mealArr.append(data["outputs"][0]["data"]["concepts"][i]["name"])
-
-        # print (data["outputs"][0]["data"]["concepts"][i]["name"])
-        # print (data["outputs"][0]["data"]["concepts"][i]["value"])
-
-    print (mealArr)
+            mealDict.update({data["outputs"][0]["data"]["concepts"][i]["name"]:i})
 
     #Need to remove general words.
     words = ""
@@ -51,13 +49,22 @@ def process():
 
     wordsArr = words.split("\n")
     
-    A = set(mealArr)
+    A = set(mealDict)
     B = set(wordsArr)
 
-    print(list(A.difference(B)))
+    relevantFood = list(A.difference(B))
 
+    #temporary O(n^2) algorithm
 
+    foodList = [0,0,0,0,0,0,0,0,0,0]
 
+    for i in range(len(relevantFood)):
+        for food, index in mealDict.items():
+            if relevantFood[i] == food:
+                foodList[index] = food
+    
 
-post()
-process()
+    foodList = [value for value in foodList if value != 0]
+    foodOutput = ' '.join(foodList)
+
+    return foodOutput

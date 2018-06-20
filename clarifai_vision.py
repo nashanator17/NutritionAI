@@ -42,7 +42,7 @@ def process():
 
     #Need to remove general words.
     words = ""
-    f = open("foodWords.txt","r")
+    f = open("./data/foodWords.txt","r")
     for line in f:
         words = words + line
     f.close()

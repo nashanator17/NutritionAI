@@ -17,6 +17,18 @@ import vision
 from difflib import SequenceMatcher
 def similar(a, b):
     return SequenceMatcher(None, a, b).ratio()
+
+def nutritionix(query):
+    nutritionixURL = "https://trackapi.nutritionix.com/v2/natural/nutrients"
+    payload = {"query":str(query), "timezone": "US/Eastern"}
+    headers = {'content-type': 'application/json', 'x-app-id': '44a081cf', 'x-app-key': '412b1c16a680363f6c16c4eee2cfa2fa'}
+    r2 = requests.post(nutritionixURL, json=payload, headers=headers)
+    content = r2.content
+    nutData = json.loads(content)
+    print(nutData)
+    servingWeightGrams = nutData['foods'][0]["serving_weight_grams"]
+    return servingWeightGrams
+
 ap = argparse.ArgumentParser()
 ap.add_argument("--gender", required = True, help = "Enter your gender")
 ap.add_argument("--age", required = True, help = "Enter your age")
@@ -61,7 +73,8 @@ for food in r.json()["hints"]:
         bestFoodLabel = food_label
 #measure_uri = r.json()["hints"][0]["measures"][0]["uri"]
 print(str(bestFoodLabel))
-measure_uri = "http://www.edamam.com/ontologies/edamam.owl#Measure_pound"
+nutritionixAPI = nutritionix(mainstring_format)
+measure_uri = "http://www.edamam.com/ontologies/edamam.owl#Measure_kilogram"
 #print(str(food_uri))
 payload = {"yield": 1,"ingredients": [{"quantity": 1,"measureURI": measure_uri,"foodURI": bestMatch}]}
 url2 = "https://api.edamam.com/api/food-database/nutrients?app_id=b354c614&app_key=f192339adb7c913344e77f7c4f4a65c0"
@@ -74,14 +87,21 @@ if "PROCNT" not in data["totalNutrients"].keys():
     foodProtein =  0
 else :
     foodProtein = data["totalNutrients"]["PROCNT"]["quantity"]
+    foodProtein = foodProtein*nutritionixAPI
+    foodProtein = foodProtein/1000
+
 if "FAT" not in data["totalNutrients"].keys():
     foodFat =  0
 else :
     foodFat = data["totalNutrients"]["FAT"]["quantity"]
+    foodFat = foodFat*nutritionixAPI
+    foodFat = foodFat/1000
 if "CHOCDF" not in data["totalNutrients"].keys():
     foodCarbs =  0
 else :
     foodCarbs = data["totalNutrients"]["CHOCDF"]["quantity"]
+    foodCarbs = foodCarbs*nutritionixAPI
+    foodCarbs = foodCarbs/1000
 #carbs = str(data["totalNutrients"]["CHOCDF"]["quantity"])+" "+str(data["totalNutrients"]["FAT"]["unit"])
 for x in data["healthLabels"]:
     healthLabels.add(x)
@@ -89,9 +109,12 @@ cal_perc = foodCalories / customerData["calories"] * 100
 pro_perc = foodProtein / customerData["protein"] * 100
 fat_perc = foodFat / customerData["fat"] * 100
 carb_perc = foodCarbs / customerData["carbs"] * 100
+print("Serving Size: " + str(nutritionixAPI) + "g")
 print("Calories: " + str(cal_perc) + "%" + "   " + str(foodCalories) + "/" + str(customerData["calories"]))
 print("Protein: " + str(pro_perc) + "%" + "   " + str(foodProtein) + "/" + str(customerData["protein"]))
 print("Fat: " + str(fat_perc) + "%" + "   " + str(foodFat) + "/" + str(customerData["fat"]))
 print("Carbohydrates: " + str(carb_perc) + "%" + "   " + str(foodCarbs) + "/" + str(customerData["carbs"]))
 #print(healthLabels)
 #print(str(calories)+ " "+str(fats))
+#
+#

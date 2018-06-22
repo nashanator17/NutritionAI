@@ -67,3 +67,6 @@ def process():
     foodList = [value for value in foodList if value != 0]
     foodOutput = ' '.join(foodList)
     return foodOutput
+
+post()
+print(process())

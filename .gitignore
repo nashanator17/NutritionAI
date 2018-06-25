@@ -1,3 +1,7 @@
 /Keys
 .DS_Store
+<<<<<<< HEAD
 /__pycache__
+=======
+__pycache__
+>>>>>>> bfeabce6ebcd142ef7819e4804e7255b7372afb5

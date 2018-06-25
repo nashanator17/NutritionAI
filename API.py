@@ -21,15 +21,18 @@ import clarifai_vision
 def similar(a, b):
     return SequenceMatcher(None, a, b).ratio()
 
-def nutritionix(query):
-    nutritionixURL = "https://trackapi.nutritionix.com/v2/natural/nutrients"
-    payload = {"query":str(query), "timezone": "US/Eastern"}
+def nutritionix(mainstring):
+    urlify = mainstring.replace(' ',"%20")
+    nutritionixURL1 = "https://trackapi.nutritionix.com/v2/search/instant?query=" + str(urlify)
+    payload = {"timezone": "US/Eastern"}
     headers = {'content-type': 'application/json', 'x-app-id': '44a081cf', 'x-app-key': '412b1c16a680363f6c16c4eee2cfa2fa'}
-    r2 = requests.post(nutritionixURL, json=payload, headers=headers)
-    content = r2.content
-    nutData = json.loads(content)
-    print(nutData)
-    servingWeightGrams = nutData['foods'][0]["serving_weight_grams"]
+    r1 = requests.get(nutritionixURL1, json=payload, headers=headers)
+    nutDataGeneral = json.loads(r1.content)
+    itemID = nutDataGeneral['branded'][0]['nix_item_id']
+    nutritionixURL2 = "https://trackapi.nutritionix.com/v2/search/item?nix_item_id=" + str(itemID)
+    r2 = requests.get(nutritionixURL2, json=payload, headers=headers)
+    nutDataSpecific = json.loads(r2.content)
+    servingWeightGrams = nutDataSpecific['foods'][0]["serving_weight_grams"]
     return servingWeightGrams
 
 def argparser():
@@ -97,6 +100,8 @@ def edamamPost(bestMatch):
 
 def getNutrition(data, servingSize):
     foodCalories = data["calories"]
+    foodCalories = foodCalories*servingSize
+    foodCalories = foodCalories/1000
     #print(data["totalNutrients"]["PROCNT"])
     if "PROCNT" not in data["totalNutrients"].keys():
         foodProtein =  0
@@ -128,18 +133,38 @@ def analyze(nutritionMap, customerData):
     percMap = {"cal_perc":cal_perc, "pro_perc":pro_perc, "fat_perc":fat_perc, "carb_perc":carb_perc}
     return percMap
 
-def display(percMap, customerData, servingSize, nutritionMap):
+def display(percMap, customerData, servingSize, nutritionMap, warnings):
     print("Serving Size: " + str(servingSize) + "g")
     print("Calories: " + str(percMap["cal_perc"]) + "%" + "   " + str(nutritionMap["foodCalories"]) + "/" + str(customerData["calories"]))
     print("Protein: " + str(percMap["pro_perc"]) + "%" + "   " + str(nutritionMap["foodProtein"]) + "/" + str(customerData["protein"]))
     print("Fat: " + str(percMap["fat_perc"]) + "%" + "   " + str(nutritionMap["foodFat"]) + "/" + str(customerData["fat"]))
     print("Carbohydrates: " + str(percMap["carb_perc"]) + "%" + "   " + str(nutritionMap["foodCarbs"]) + "/" + str(customerData["carbs"]))
+    print("WARNING! CONTAINS: " + warnings)
 
 def clarifai(imagePath):
     clarifai_vision.post(imagePath)
     resultSet = clarifai_vision.process().split(" ")
     #LOOP THROUGH AND GET NUTRITION FOR EACH AND SUM UP
-    
+
+def getRestrictions(data, customerData):
+    warnings = ""
+    healthLabels = ""
+    cautions = ""
+    for x in data["healthLabels"]:
+        healthLabels += str(x) + " "
+    print("healthLabels" + healthLabels)
+    for x in data["cautions"]:
+        cautions += str(x) + " "
+    print("cautions" + cautions)
+    for restriction in customerData["restrictions"]:
+        # restriction = restriction.upper()
+        print(restriction)
+        if restriction.upper() in cautions or (restriction.upper()+"_FREE") in healthLabels:
+            warnings += str(restriction) + " "
+    return warnings
+
+
+
 def main():
     customerData = customerInfo.calculate(argparser())
     mainstring = vision.run()
@@ -150,13 +175,12 @@ def main():
     bestMatch = bestString(mainstring_format, r)
     data = edamamPost(bestMatch)
     nutritionMap = getNutrition(data, servingSize)
+    warnings = getRestrictions(data, customerData)
     percMap = analyze(nutritionMap, customerData)
-    display(percMap, customerData, servingSize, nutritionMap)
-    
+    display(percMap, customerData, servingSize, nutritionMap, warnings)
+
 
 main()
 
-# healthLabels = set()
+
 #
-# for x in data["healthLabels"]:
-#     healthLabels.add(x)

@@ -1,8 +1,8 @@
 def calculate(infoMap):
     list_of_restrictions = set()
     if infoMap["restrictions"] == "yes":
-        input = raw_input("list your allergies separated by commas")
-        list_of_allergies = set(input.split(","))
+        userInput = input("list your food restrictions separated by commas:  ")
+        list_of_restrictions = set(userInput.split(","))
     BMR = 0
 
     exerciseMap = {"low":1.2,"light":1.375,"moderate":1.55,"heavy":1.725}
@@ -22,4 +22,4 @@ def calculate(infoMap):
     fat = BMR * 0.25 / 9.0
     carbs = (BMR - protein - fat) / 4.0
 
-    return {"calories":calories, "protein":protein, "fat":fat, "carbs":carbs}
+    return {"calories":calories, "protein":protein, "fat":fat, "carbs":carbs, "restrictions":list_of_restrictions}

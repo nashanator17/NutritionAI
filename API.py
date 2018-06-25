@@ -7,7 +7,8 @@
 # content = result.content
 # data = json.loads(content)
 # name = data["hints"]
-#
+# Example Call:
+#python3 API.py --gender male --age 20 --weight 165 --height 170 --exercise light --restrictions no --weight_goal lose
 import requests
 import json
 from pprint import pprint
@@ -15,6 +16,7 @@ import argparse
 import customerInfo
 import vision
 from difflib import SequenceMatcher
+import clarifai_vision
 
 def similar(a, b):
     return SequenceMatcher(None, a, b).ratio()
@@ -133,7 +135,11 @@ def display(percMap, customerData, servingSize, nutritionMap):
     print("Fat: " + str(percMap["fat_perc"]) + "%" + "   " + str(nutritionMap["foodFat"]) + "/" + str(customerData["fat"]))
     print("Carbohydrates: " + str(percMap["carb_perc"]) + "%" + "   " + str(nutritionMap["foodCarbs"]) + "/" + str(customerData["carbs"]))
 
-
+def clarifai(imagePath):
+    clarifai_vision.post(imagePath)
+    resultSet = clarifai_vision.process().split(" ")
+    #LOOP THROUGH AND GET NUTRITION FOR EACH AND SUM UP
+    
 def main():
     customerData = customerInfo.calculate(argparser())
     mainstring = vision.run()
@@ -146,6 +152,7 @@ def main():
     nutritionMap = getNutrition(data, servingSize)
     percMap = analyze(nutritionMap, customerData)
     display(percMap, customerData, servingSize, nutritionMap)
+    
 
 main()
 

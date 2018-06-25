@@ -152,8 +152,17 @@ def main():
     nutritionMap = getNutrition(data, servingSize)
     percMap = analyze(nutritionMap, customerData)
     display(percMap, customerData, servingSize, nutritionMap)
-    
+    frontResult(nutritionMap)
 
+def frontResult(nutritionMap):
+    macros = []
+    macros.append({"Protein":nutritionMap["foodProtein"]})
+    macros.append({"Fat":nutritionMap["foodFat"]})
+    macros.append({"Carbs":nutritionMap["foodCarbs"]})
+
+    with open ('./output_data/macroResults.json', 'w') as f:
+        json.dump(macros,f)
+    
 main()
 
 # healthLabels = set()

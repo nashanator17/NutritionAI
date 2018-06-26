@@ -1,1 +1,14 @@
-/Keys
+#Google API keys
+Keys/
+
+#pycache folder
+__pycache__/
+
+#vscode
+.vscode/
+
+.DC_Store
+
+node_modules/
+
+opencv_frame_0.jpg

@@ -20,6 +20,7 @@ def get_barcode(photo_path):
 
 # Get product name using the barcode
 def product_from_barcode(barcode):
+    print(barcode)
     url = "https://api.upcitemdb.com/prod/trial/lookup?upc=" + barcode
     r = requests.get(url)
     print("Request status: " +  str(r.status_code))

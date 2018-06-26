@@ -150,8 +150,8 @@ def main():
     mainstring_format = getResult[0]
     r = getResult[1]
     servingSize = nutritionix(mainstring_format)
-    # bestMatch = bestString(mainstring_format, r)
-    data = edamamPost(mainstring_format)
+    bestMatch = bestString(mainstring_format, r)
+    data = edamamPost(bestMatch)
     nutritionMap = getNutrition(data, servingSize)
     percMap = analyze(nutritionMap, customerData)
     display(percMap, customerData, servingSize, nutritionMap)

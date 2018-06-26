@@ -6,7 +6,7 @@ from clarifai import rest
 from clarifai.rest import ClarifaiApp
 from clarifai.rest import Image as CImage
 
-def post():
+def post(imagePath):
 
     f = open("./Keys/key_clarifai.txt","r")
     key = f.readline()
@@ -17,7 +17,7 @@ def post():
 
 
     model = app.models.get('food-items-v1.0')
-    image = CImage(file_obj=open('./Images/chicken.jpg', 'rb'))
+    image = CImage(file_obj=open(imagePath, 'rb'))
 
     #output this to JSON
     with open ('./output_data/results.json', 'w') as f:
@@ -66,5 +66,4 @@ def process():
 
     foodList = [value for value in foodList if value != 0]
     foodOutput = ' '.join(foodList)
-
     return foodOutput

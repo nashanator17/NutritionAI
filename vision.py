@@ -9,6 +9,7 @@ from google.cloud import vision
 from google.cloud.vision import types
 
 #call process_image to get a returned string containing what you want
+#export GOOGLE_APPLICATION_CREDENTIALS=PATH_TO_KEY_FILE
 
 def detect_text(path):
     """Detects text in the file."""

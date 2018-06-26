@@ -22,8 +22,4 @@ def calculate(infoMap):
     fat = BMR * 0.25 / 9.0
     carbs = (BMR - protein - fat) / 4.0
 
-<<<<<<< HEAD
     return {"calories":calories, "protein":protein, "fat":fat, "carbs":carbs, "restrictions":list_of_restrictions}
-=======
-    return {"calories":calories, "protein":protein, "fat":fat, "carbs":carbs, "restrictions":list_of_restrictions}
->>>>>>> 4fe12015fb167d78ceaf3df2e5b9eddba822b74f

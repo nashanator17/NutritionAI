@@ -47,8 +47,38 @@ def detect_text(path):
     print("vision " + resultString)
     return resultString
 
-
 def process_image():
+
+    img_counter = 0
+    cam = cv2.VideoCapture(0)
+
+    cv2.namedWindow("test")
+
+    while(True):
+        ret, frame = cam.read()
+        cv2.imshow("test",frame)
+
+        k = cv2.waitKey(1)
+
+        if k%256 == 27:
+            print("Escape hit, closing...")
+            break
+
+        elif k%256 == 32:
+
+            img_name = "opencv_frame_{}.jpg".format(img_counter)
+            img_counter = img_counter + 1
+            cv2.imwrite(img_name,frame)
+            print("image taken, processing results...")
+            # Instantiates a client
+            client = vision.ImageAnnotatorClient()
+            return img_name
+
+
+    cam.release()
+    cv2.destroyAllWindows()
+
+def process_image_barcode():
 
     img_counter = 0
     cam = cv2.VideoCapture(0)
@@ -102,11 +132,12 @@ def format_text(text):
     # file.close()
 
 def run(vision_option):
-    img_name = process_image()
     if(vision_option == 'b'):
+        img_name = process_image_barcode()
         product_barcode = barcode.get_barcode(img_name)
         product_name = barcode.product_from_barcode(product_barcode)
     else:
+        img_name = process_image()
         product_name = detect_text(img_name)
     result = format_text(product_name)
     return result

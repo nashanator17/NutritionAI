@@ -2,6 +2,7 @@ import io
 import os
 import google
 import cv2
+import barcode
 
 # Imports the Google Cloud client library
 from google.cloud import vision
@@ -56,6 +57,8 @@ def process_image():
 
     while(True):
         ret, frame = cam.read()
+        frame = cv2.flip( frame, 1)
+        cv2.rectangle(frame,(500,250),(900,500),(0,255,0),3)
         cv2.imshow("test",frame)
 
         k = cv2.waitKey(1)
@@ -68,7 +71,9 @@ def process_image():
 
             img_name = "opencv_frame_{}.jpg".format(img_counter)
             img_counter = img_counter + 1
-            cv2.imwrite(img_name,frame)
+            roi = frame[250:500, 500:900]
+            roi = cv2.flip(roi, 1)
+            cv2.imwrite(img_name,roi)
             print("image taken, processing results...")
             # Instantiates a client
             client = vision.ImageAnnotatorClient()
@@ -96,8 +101,12 @@ def format_text(text):
     # file.write(result)
     # file.close()
 
-def run():
+def run(vision_option):
     img_name = process_image()
-    parsed = detect_text(img_name)
-    result = format_text(parsed)
+    if(vision_option == 'b'):
+        product_barcode = barcode.get_barcode(img_name)
+        product_name = barcode.product_from_barcode(product_barcode)
+    else:
+        product_name = detect_text(img_name)
+    result = format_text(product_name)
     return result

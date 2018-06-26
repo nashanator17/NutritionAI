@@ -167,13 +167,22 @@ def getRestrictions(data, customerData):
 
 def main():
     customerData = customerInfo.calculate(argparser())
-    mainstring = vision.run()
+
+    # get user input to scan barcode or label
+    while(True):
+        vision_option = input("type 'b' to scan barcode or 'l' to read item label: ")
+        if(vision_option != 'b' and vision_option != 'l'):
+            print("Must type 'b' or 'l")
+            continue
+        else:
+            break
+    mainstring = vision.run(vision_option)
     getResult = edamamGet(mainstring)
     mainstring_format = getResult[0]
     r = getResult[1]
     servingSize = nutritionix(mainstring_format)
-    bestMatch = bestString(mainstring_format, r)
-    data = edamamPost(bestMatch)
+    # bestMatch = bestString(mainstring_format, r)
+    data = edamamPost(mainstring_format)
     nutritionMap = getNutrition(data, servingSize)
     warnings = getRestrictions(data, customerData)
     percMap = analyze(nutritionMap, customerData)

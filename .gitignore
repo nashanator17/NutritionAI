@@ -1,11 +1,5 @@
 /Keys
 .DS_Store
-<<<<<<< HEAD
-/__pycache__
-=======
-<<<<<<< HEAD
-/__pycache__
-=======
-__pycache__
->>>>>>> bfeabce6ebcd142ef7819e4804e7255b7372afb5
->>>>>>> 98c65e5e3da22753bfbd654350ff0e06c71980c1
+__pycache__/
+node_modules/
+opencv_frame_0.jpg

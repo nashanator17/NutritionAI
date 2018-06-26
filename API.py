@@ -187,15 +187,5 @@ def main():
     warnings = getRestrictions(data, customerData)
     percMap = analyze(nutritionMap, customerData)
     display(percMap, customerData, servingSize, nutritionMap, warnings)
-<<<<<<< HEAD
 
-=======
->>>>>>> 4fe12015fb167d78ceaf3df2e5b9eddba822b74f
-
-
-<<<<<<< HEAD
-
-#
-=======
 main()
->>>>>>> 4fe12015fb167d78ceaf3df2e5b9eddba822b74f

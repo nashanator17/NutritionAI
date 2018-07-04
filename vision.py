@@ -3,6 +3,8 @@ import os
 import google
 import cv2
 import barcode
+from PIL import Image
+import time
 
 # Imports the Google Cloud client library
 from google.cloud import vision
@@ -82,59 +84,55 @@ def process_image_barcode():
 
     img_counter = 0
     cam = cv2.VideoCapture(0)
-
+    cam.set(6,24)
     cv2.namedWindow("test")
 
     while(True):
         ret, frame = cam.read()
-        frame = cv2.flip( frame, 1)
-        cv2.rectangle(frame,(500,250),(900,500),(0,255,0),3)
+        frame = cv2.flip(frame, 1)
+        cv2.rectangle(frame,(500,250),(900,500),(255,0,0),3)
         cv2.imshow("test",frame)
-
-        k = cv2.waitKey(1)
-
-        if k%256 == 27:
-            print("Escape hit, closing...")
-            break
-
-        elif k%256 == 32:
-
-            img_name = "opencv_frame_{}.jpg".format(img_counter)
-            img_counter = img_counter + 1
-            roi = frame[250:500, 500:900]
-            roi = cv2.flip(roi, 1)
-            cv2.imwrite(img_name,roi)
-            print("image taken, processing results...")
-            # Instantiates a client
+        img_name = "latest.jpg"
+        roi = frame[250:500, 500:900]
+        roi = cv2.flip(roi, 1)
+        lab= cv2.cvtColor(roi, cv2.COLOR_BGR2LAB)
+        l, a, b = cv2.split(lab)
+        clahe = cv2.createCLAHE(clipLimit=3.0, tileGridSize=(8,8))
+        cl = clahe.apply(l)
+        limg = cv2.merge((cl,a,b))
+        roi = cv2.cvtColor(limg, cv2.COLOR_LAB2BGR)
+        cv2_im = cv2.cvtColor(roi,cv2.COLOR_BGR2RGB)
+        pil_im = Image.fromarray(cv2_im)
+        cv2.waitKey(1)
+        product_barcode = barcode.get_barcode(pil_im)
+        if product_barcode is not None:
+            #cv2.imshow("contrast",cv2_im)
+            #cv2.waitKey(0)
+            print("found")
+            cv2.rectangle(frame,(500,250),(900,500),(0,255,0),3)
+            cv2.imshow("test",frame)
+            cv2.waitKey(10)
+            time.sleep(1)
+            cam.release()
+            cv2.destroyAllWindows()
             client = vision.ImageAnnotatorClient()
-            return img_name
+            return product_barcode
 
-
-    cam.release()
-    cv2.destroyAllWindows()
 
 def format_text(text):
     print("format input" + text)
     stripNewLine = text.replace('\n', " ")
     finalString = stripNewLine.replace('"',"")
-    # print (finalString)
-    # print ('\n')
 
     words = finalString.split()
     final = " ".join(sorted(set(words), key=words.index))
-    # print (final)
-
-    #print (result)
 
     return final
-    # file = open('result.txt','w')
-    # file.write(result)
-    # file.close()
+
 
 def run(vision_option):
     if(vision_option == 'b'):
-        img_name = process_image_barcode()
-        product_barcode = barcode.get_barcode(img_name)
+        product_barcode = process_image_barcode()
         product_name = barcode.product_from_barcode(product_barcode)
     else:
         img_name = process_image()

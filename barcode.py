@@ -3,11 +3,7 @@ import zbarlight
 import requests
 
 # Get product barcode from image using zbarlight
-def get_barcode(photo_path):
-
-    with open(photo_path, 'rb') as image_file:
-        image = Image.open(image_file)
-        image.load()
+def get_barcode(image):
 
     barcode = zbarlight.scan_codes(['ean13'], image)
     while True:
@@ -15,7 +11,7 @@ def get_barcode(photo_path):
             code =  str(barcode[0])[2:-1]
             return(code)
         except:
-            print("Can't find this barcode")
+            #print("Can't find this barcode")
             break
 
 # Get product name using the barcode

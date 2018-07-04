@@ -133,13 +133,14 @@ def analyze(nutritionMap, customerData):
     percMap = {"cal_perc":cal_perc, "pro_perc":pro_perc, "fat_perc":fat_perc, "carb_perc":carb_perc}
     return percMap
 
-def display(percMap, customerData, servingSize, nutritionMap, warnings):
+def display(percMap, customerData, servingSize, nutritionMap, warningMap):
     print("Serving Size: " + str(servingSize) + "g")
     print("Calories: " + str(percMap["cal_perc"]) + "%" + "   " + str(nutritionMap["foodCalories"]) + "/" + str(customerData["calories"]))
     print("Protein: " + str(percMap["pro_perc"]) + "%" + "   " + str(nutritionMap["foodProtein"]) + "/" + str(customerData["protein"]))
     print("Fat: " + str(percMap["fat_perc"]) + "%" + "   " + str(nutritionMap["foodFat"]) + "/" + str(customerData["fat"]))
     print("Carbohydrates: " + str(percMap["carb_perc"]) + "%" + "   " + str(nutritionMap["foodCarbs"]) + "/" + str(customerData["carbs"]))
-    print("WARNING! CONTAINS: " + warnings)
+    print("WARNING! CONTAINS: " + warningMap["foodWarning"])
+    print("WARNING! DOES NOT CONFORM TO FOLLOWING DIETS: " + warningMap["dietWarnings"])
 
 def clarifai(imagePath):
     clarifai_vision.post(imagePath)
@@ -148,6 +149,7 @@ def clarifai(imagePath):
 
 def getRestrictions(data, customerData):
     warnings = ""
+    dietWarning = ""
     healthLabels = ""
     cautions = ""
     for x in data["healthLabels"]:
@@ -156,12 +158,20 @@ def getRestrictions(data, customerData):
     for x in data["cautions"]:
         cautions += str(x) + " "
     print("cautions" + cautions)
-    for restriction in customerData["restrictions"]:
+    #check and see if allergy is in cautions
+    for allergy in customerData["allergies"]:
         # restriction = restriction.upper()
-        print(restriction)
-        if restriction.upper() in cautions or (restriction.upper()+"_FREE") in healthLabels:
-            warnings += str(restriction) + " "
-    return warnings
+        print(allergy)
+        if allergy.upper() in cautions or (allergy.upper()+"_FREE") not in healthLabels:
+            warnings += str(allergy) + " "
+
+    for diet in customerData["diets"]:
+        print("diet: " + diet)
+        if(diet.upper() not in healthLabels):
+            dietWarning +=str(diet) + " "
+
+    warningMap = {"foodWarning": warnings, "dietWarnings" : dietWarning}
+    return warningMap
 
 
 
@@ -184,8 +194,8 @@ def main():
     bestMatch = bestString(mainstring_format, r)
     data = edamamPost(bestMatch)
     nutritionMap = getNutrition(data, servingSize)
-    warnings = getRestrictions(data, customerData)
+    warningMap = getRestrictions(data, customerData)
     percMap = analyze(nutritionMap, customerData)
-    display(percMap, customerData, servingSize, nutritionMap, warnings)
+    display(percMap, customerData, servingSize, nutritionMap, warningMap)
 
 main()

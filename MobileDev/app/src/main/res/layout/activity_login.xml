@@ -59,7 +59,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="124dp"
+        android:layout_marginBottom="108dp"
         android:background="@drawable/loginbutton"
         android:padding="10dp"
         android:text="Login"

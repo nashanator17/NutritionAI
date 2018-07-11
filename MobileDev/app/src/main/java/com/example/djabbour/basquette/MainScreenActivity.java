@@ -1,5 +1,6 @@
 package com.example.djabbour.basquette;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -14,19 +15,25 @@ public class MainScreenActivity extends AppCompatActivity {
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
+        //Use switch cases to navigate to another screen
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    mTextMessage.setText(R.string.title_home);
-                    return true;
+                    break;
+
                 case R.id.navigation_scan:
-                    mTextMessage.setText(R.string.title_scan);
-                    return true;
+                    Intent intent1 = new Intent(MainScreenActivity.this, ScanScreenActivity.class);
+                    startActivity(intent1);
+                    break;
+
                 case R.id.navigation_settings:
-                    mTextMessage.setText(R.string.title_settings);
-                    return true;
+                    Intent intent2 = new Intent(MainScreenActivity.this, ScanScreenActivity.class);
+                    startActivity(intent2);
+                    break;
+
             }
+
             return false;
         }
     };

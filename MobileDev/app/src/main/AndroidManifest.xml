@@ -19,6 +19,8 @@
         <activity
             android:name=".MainScreenActivity"
             android:label="@string/title_activity_main_screen"></activity>
+        <activity android:name=".ScanScreenActivity"></activity>
+        <activity android:name=".SettingScreenActivity"></activity>
     </application>
 
 </manifest>

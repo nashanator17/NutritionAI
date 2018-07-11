@@ -3,4 +3,8 @@
     <color name="basquette">#FFFAF2</color>
     <color name="loginBack">#ecf0f1</color>
     <color name="loginButton">#ff7979</color>
+    <string name="title_activity_main_screen">MainScreen</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 </resources>

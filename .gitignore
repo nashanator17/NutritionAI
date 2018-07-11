@@ -13,3 +13,6 @@ __pycache__/
 node_modules/
 
 opencv_frame_0.jpg
+
+#OpenCV SDK for Android
+OpenCV-android-sdk/

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Basquette</string>
+    <color name="basquette">#FFFAF2</color>
+    <color name="loginBack">#ecf0f1</color>
 </resources>

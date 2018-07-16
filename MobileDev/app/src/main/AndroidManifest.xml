@@ -22,6 +22,7 @@
         <activity android:name=".ScanScreenActivity"></activity>
         <activity android:name=".SettingScreenActivity"></activity>
         <activity android:name=".MainActivity"></activity>
+        <activity android:name=".SignupActivity"></activity>
     </application>
 
 </manifest>

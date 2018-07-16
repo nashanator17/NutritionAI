@@ -80,6 +80,15 @@
         android:text="Allergies"
         android:textColor="@color/black" />
 
+    <TextView
+        android:id="@+id/restrictionsTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/restrictions"
+        android:layout_alignStart="@+id/heightTitle"
+        android:text="Food Constraints"
+        android:textColor="@color/black" />
+
     <EditText
         android:id="@+id/age"
         android:layout_width="wrap_content"
@@ -146,5 +155,28 @@
         android:background="@drawable/textback"
         android:ems="10"
         android:hint="Peanuts, Soy, ..." />
+
+    <EditText
+        android:id="@+id/restrictions"
+        android:layout_width="164dp"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/age"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="126dp"
+        android:background="@drawable/textback"
+        android:ems="10"
+        android:hint="Vegetarian..." />
+
+    <Button
+        android:id="@+id/beginButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="46dp"
+        android:background="@drawable/loginbutton"
+        android:padding="10dp"
+        android:text="Begin"
+        android:textColor="#ffffff" />
 
 </RelativeLayout>

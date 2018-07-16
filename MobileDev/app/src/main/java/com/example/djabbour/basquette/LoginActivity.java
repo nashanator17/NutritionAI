@@ -15,17 +15,27 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
 
-        //Retrieving login button by ID and navigating to main screen
+        //Retrieving login/Signup button by ID
         Button loginButton = (Button) findViewById(R.id.loginButton);
-        loginButton.setOnClickListener(new View.OnClickListener() {
+        Button signupButton = (Button) findViewById(R.id.signupButton);
 
+        //Navigate to main screen on login
+        loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(intent);
+                Intent intent1 = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(intent1);
             }
-
         });
+
+        signupButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent2 = new Intent(LoginActivity.this, SignupActivity.class);
+                startActivity(intent2);
+            }
+        });
+
 
     }
 

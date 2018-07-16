@@ -12,7 +12,7 @@ import android.util.Log;
  */
 public abstract class BaseLoaderCallback implements LoaderCallbackInterface {
 
-    public BaseLoaderCallback(com.example.djabbour.basquette.ScanScreenActivity AppContext) {
+    public BaseLoaderCallback(com.example.djabbour.basquette.HelloOpenCVActivity AppContext) {
         mAppContext = AppContext;
     }
 

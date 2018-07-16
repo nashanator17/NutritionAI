@@ -3,6 +3,8 @@
     <color name="basquette">#FFFAF2</color>
     <color name="loginBack">#ecf0f1</color>
     <color name="loginButton">#ff7979</color>
+    <color name="toolbar">#ffe0b2</color>
+    <color name="black">#000</color>
 
     <string name="title_activity_main_screen">MainScreen</string>
     <string name="title_home">Home</string>

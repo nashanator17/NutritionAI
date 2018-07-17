@@ -1,0 +1,26 @@
+{
+    "logs": [
+        {
+            "outputFile": "/Users/djabbour/Desktop/NutritionAI/MobileDev/aChartEngine/build/intermediates/incremental/mergeDebugResources/merged.dir/values/values.xml",
+            "map": [
+                {
+                    "source": "/Users/djabbour/Desktop/NutritionAI/MobileDev/aChartEngine/src/main/res/values/strings.xml",
+                    "from": {
+                        "startLines": "6,3,2,7,4,5",
+                        "startColumns": "1,1,4,1,1,1",
+                        "startOffsets": "228,102,55,261,166,199",
+                        "endColumns": "32,59,49,46,28,28",
+                        "endOffsets": "259,160,100,306,193,226"
+                    },
+                    "to": {
+                        "startLines": "2,3,4,5,6,7",
+                        "startColumns": "4,4,4,4,4,4",
+                        "startOffsets": "55,91,154,204,254,286",
+                        "endColumns": "35,62,49,49,31,31",
+                        "endOffsets": "86,149,199,249,281,313"
+                    }
+                }
+            ]
+        }
+    ]
+}

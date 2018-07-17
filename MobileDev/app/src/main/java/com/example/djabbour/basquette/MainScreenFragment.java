@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 public class MainScreenFragment extends Fragment {
 
+
     public static MainScreenFragment newInstance() {
         MainScreenFragment fragment = new MainScreenFragment();
         return fragment;

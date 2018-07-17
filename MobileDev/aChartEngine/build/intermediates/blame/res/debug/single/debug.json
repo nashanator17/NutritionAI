@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "/Users/djabbour/Desktop/NutritionAI/MobileDev/aChartEngine/build/intermediates/res/merged/debug/drawable-mdpi_achartengine.png.flat",
+        "source": "/Users/djabbour/Desktop/NutritionAI/MobileDev/aChartEngine/src/main/res/drawable-mdpi/achartengine.png"
+    },
+    {
+        "merged": "/Users/djabbour/Desktop/NutritionAI/MobileDev/aChartEngine/build/intermediates/res/merged/debug/drawable-ldpi_achartengine.png.flat",
+        "source": "/Users/djabbour/Desktop/NutritionAI/MobileDev/aChartEngine/src/main/res/drawable-ldpi/achartengine.png"
+    },
+    {
+        "merged": "/Users/djabbour/Desktop/NutritionAI/MobileDev/aChartEngine/build/intermediates/res/merged/debug/drawable-hdpi_achartengine.png.flat",
+        "source": "/Users/djabbour/Desktop/NutritionAI/MobileDev/aChartEngine/src/main/res/drawable-hdpi/achartengine.png"
+    },
+    {
+        "merged": "/Users/djabbour/Desktop/NutritionAI/MobileDev/aChartEngine/build/intermediates/res/merged/debug/layout_xy_chart.xml.flat",
+        "source": "/Users/djabbour/Desktop/NutritionAI/MobileDev/aChartEngine/src/main/res/layout/xy_chart.xml"
+    }
+]

@@ -13,4 +13,10 @@
         android:text="Dashboard"
         android:textSize="30sp"/>
 
+    <com.github.mikephil.charting.charts.PieChart
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:id="@+id/pieChart">
+    </com.github.mikephil.charting.charts.PieChart>
+
 </RelativeLayout>

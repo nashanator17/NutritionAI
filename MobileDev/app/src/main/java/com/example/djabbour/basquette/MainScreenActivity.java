@@ -28,7 +28,7 @@ public class MainScreenActivity extends AppCompatActivity {
 
         //Logs details about activity it is working in
         Log.d(TAG, "onCreate: Starting to create chart");
-        
+
     }
 
 }

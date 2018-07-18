@@ -14,11 +14,13 @@ public class MainScreenFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         Log.d(TAG, "OK OK OK ");
-        return inflater.inflate(R.layout.activity_main_screen, container, false);
+        return inflater.inflate(R.layout.fragment_main, container, false);
     }
 }

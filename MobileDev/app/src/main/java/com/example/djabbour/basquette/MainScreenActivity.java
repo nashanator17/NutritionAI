@@ -14,9 +14,6 @@ import com.github.mikephil.charting.data.PieEntry;
 
 import java.util.ArrayList;
 
-import static android.content.ContentValues.TAG;
-
-
 public class MainScreenActivity extends AppCompatActivity {
 
     private static String TAG = "MainActivity";
@@ -25,11 +22,10 @@ public class MainScreenActivity extends AppCompatActivity {
     private String[] xData = {"Carbs", "Fats", "Proteins"};
     PieChart pieChart;
 
-    public static MainScreenFragment newInstance() {
-        MainScreenFragment fragment = new MainScreenFragment();
-        return fragment;
-    }
-
+//    public static MainScreenFragment newInstance() {
+//        MainScreenFragment fragment = new MainScreenFragment();
+//        return fragment;
+//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

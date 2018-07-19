@@ -23,31 +23,27 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                        Fragment selectedFragment = null;
-
-                        switch (item.getItemId()) {
+                        switch (item.getItemId()){
                             case R.id.navigation_home:
-                                selectedFragment = MainScreenActivity.newInstance();
+
                                 break;
+
                             case R.id.navigation_scan:
-                                selectedFragment = ScanScreenActivity.newInstance();
                                 break;
+
                             case R.id.navigation_settings:
-                                selectedFragment = SettingScreenActivity.newInstance();
                                 break;
+
                         }
 
-                        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                        transaction.replace(R.id.frame_layout, selectedFragment);
-                        transaction.commit();
-                        return true;
+                        return false;
                     }
                 });
 
         //Manually displaying the first fragment - one time only
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.frame_layout, MainScreenActivity.newInstance());
-        transaction.commit();
+//        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+//        transaction.replace(R.id.frame_layout, MainScreenActivity.newInstance());
+//        transaction.commit();
 
         //Used to select an item programmatically
         //bottomNavigationView.getMenu().getItem(2).setChecked(true);

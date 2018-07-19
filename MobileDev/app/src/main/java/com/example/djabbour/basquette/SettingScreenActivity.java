@@ -31,11 +31,13 @@ public class SettingScreenActivity extends AppCompatActivity {
                         switch (item.getItemId()){
                             case R.id.navigation_home:
                                 Intent homeIntent = new Intent(SettingScreenActivity.this, MainScreenActivity.class);
+                                homeIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 startActivity(homeIntent);
                                 break;
 
                             case R.id.navigation_scan:
                                 Intent scanIntent = new Intent(SettingScreenActivity.this, ScanScreenActivity.class);
+                                scanIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 startActivity(scanIntent);
                                 break;
 

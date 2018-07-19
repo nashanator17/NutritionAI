@@ -15,12 +15,6 @@
         android:text="Dashboard"
         android:textSize="30sp"/>
 
-    <com.github.mikephil.charting.charts.PieChart
-        android:layout_height="match_parent"
-        android:layout_width="match_parent"
-        android:id="@+id/pieChart">
-    </com.github.mikephil.charting.charts.PieChart>
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -39,5 +33,11 @@
         </android.support.design.widget.BottomNavigationView>
 
     </RelativeLayout>
+
+    <com.github.mikephil.charting.charts.PieChart
+        android:id="@+id/pieChart"
+        android:layout_width="286dp"
+        android:layout_height="446dp"
+        android:layout_centerHorizontal="true"></com.github.mikephil.charting.charts.PieChart>
 
 </RelativeLayout>

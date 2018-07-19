@@ -1,10 +1,15 @@
 package com.example.djabbour.basquette;
 
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
@@ -22,15 +27,42 @@ public class MainScreenActivity extends AppCompatActivity {
     private String[] xData = {"Carbs", "Fats", "Proteins"};
     PieChart pieChart;
 
-//    public static MainScreenFragment newInstance() {
-//        MainScreenFragment fragment = new MainScreenFragment();
-//        return fragment;
-//    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
+
+        BottomNavigationView bottomNavigationView = (BottomNavigationView)
+                findViewById(R.id.navigation);
+
+        Menu menu = bottomNavigationView.getMenu();
+        MenuItem menuItem = menu.getItem(0);
+        menuItem.setChecked(true);
+
+        bottomNavigationView.setOnNavigationItemSelectedListener
+                (new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                        switch (item.getItemId()){
+                            case R.id.navigation_home:
+                                break;
+
+                            case R.id.navigation_scan:
+                                Intent scanIntent = new Intent(MainScreenActivity.this, ScanScreenActivity.class);
+                                startActivity(scanIntent);
+                                break;
+
+                            case R.id.navigation_settings:
+                                Intent settingsIntent = new Intent(MainScreenActivity.this, SettingScreenActivity.class);
+                                startActivity(settingsIntent);
+                                break;
+
+                        }
+
+                        return false;
+                    }
+                });
 
         //Logs details about activity it is working in
         Log.d(TAG, "onCreate: Starting to create chart");
@@ -73,7 +105,6 @@ public class MainScreenActivity extends AppCompatActivity {
 
         Legend legend = pieChart.getLegend();
         legend.setForm(Legend.LegendForm.CIRCLE);
-        legend.setPosition(Legend.LegendPosition.LEFT_OF_CHART); //depracated, fix this
 
         //Create pie data object
         PieData pieData = new PieData(pieDataSet);

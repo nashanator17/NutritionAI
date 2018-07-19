@@ -1,10 +1,9 @@
 package com.example.djabbour.basquette;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
@@ -25,13 +24,18 @@ public class MainActivity extends AppCompatActivity {
                     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                         switch (item.getItemId()){
                             case R.id.navigation_home:
-
+                                Intent homeIntent = new Intent(MainActivity.this, MainScreenActivity.class);
+                                startActivity(homeIntent);
                                 break;
 
                             case R.id.navigation_scan:
+                                Intent scanIntent = new Intent(MainActivity.this, ScanScreenActivity.class);
+                                startActivity(scanIntent);
                                 break;
 
                             case R.id.navigation_settings:
+                                Intent settingsIntent = new Intent(MainActivity.this, SettingScreenActivity.class);
+                                startActivity(settingsIntent);
                                 break;
 
                         }

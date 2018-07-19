@@ -1,29 +1,16 @@
 package com.example.djabbour.basquette;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.support.v7.app.AppCompatActivity;
 
-
-public class ScanScreenActivity extends Fragment {
-    public static ScanScreenActivity newInstance() {
-        ScanScreenActivity fragment = new ScanScreenActivity();
-        return fragment;
-    }
+public class ScanScreenActivity extends AppCompatActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-
+        setContentView(R.layout.activity_scan_screen);
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.activity_scan_screen, container, false);
-    }
 
 }

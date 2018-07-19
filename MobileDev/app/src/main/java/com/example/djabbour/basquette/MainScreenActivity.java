@@ -50,11 +50,13 @@ public class MainScreenActivity extends AppCompatActivity {
 
                             case R.id.navigation_scan:
                                 Intent scanIntent = new Intent(MainScreenActivity.this, ScanScreenActivity.class);
+                                scanIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 startActivity(scanIntent);
                                 break;
 
                             case R.id.navigation_settings:
                                 Intent settingsIntent = new Intent(MainScreenActivity.this, SettingScreenActivity.class);
+                                settingsIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 startActivity(settingsIntent);
                                 break;
 

@@ -28,12 +28,27 @@
         android:layout_centerHorizontal="true"
         app:srcCompat="@drawable/basquette" />
 
+    <!-- Airmiles text field -->
+    <EditText
+        android:id="@+id/airmiles"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="254dp"
+        android:background="@color/loginBack"
+        android:ems="10"
+        android:hint="Airmiles #"
+        android:inputType="textPersonName" />
+
     <!--Username text field-->
     <EditText
         android:id="@+id/editText2"
         android:layout_width="wrap_content"
         android:layout_height="35dp"
-        android:layout_centerInParent="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="200dp"
         android:background="@color/loginBack"
         android:ems="10"
         android:hint="Username"
@@ -46,11 +61,11 @@
         android:layout_height="36dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="200dp"
-        android:ems="10"
-        android:inputType="textPersonName"
+        android:layout_marginBottom="139dp"
         android:background="@color/loginBack"
-        android:hint="Password" />
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPersonName" />
 
     <!--Login button-->
     <Button
@@ -58,8 +73,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="108dp"
+        android:layout_alignStart="@+id/editText2"
+        android:layout_marginBottom="44dp"
         android:background="@drawable/loginbutton"
         android:padding="10dp"
         android:text="Login"
@@ -70,12 +85,38 @@
         android:id="@+id/signupButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="36dp"
+        android:layout_alignEnd="@+id/editText2"
+        android:layout_alignTop="@+id/loginButton"
         android:background="@drawable/loginbutton"
         android:padding="10dp"
         android:text="Sign Up"
         android:textColor="#ffffff" />
+
+    <TextView
+        android:id="@+id/airmilesSignIn"
+        android:layout_width="299dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="248dp"
+        android:ems="10"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:inputType="textPersonName"
+        android:text="Or"
+        android:textSize="14sp" />
+
+    <EditText
+        android:id="@+id/airmilesSignIn2"
+        android:layout_width="299dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/airmiles"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="-248dp"
+        android:ems="10"
+        android:gravity="center"
+        android:inputType="textPersonName"
+        android:text="Sign In With Airmiles"
+        android:textSize="14sp" />
 
 </RelativeLayout>

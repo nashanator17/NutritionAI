@@ -10,11 +10,15 @@ import android.view.MenuItem;
 
 public class ScanScreenActivity extends AppCompatActivity {
 
+    private String TAG;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan_screen);
+
+        //Navigation configuration
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView)
                 findViewById(R.id.navigation);
@@ -28,7 +32,7 @@ public class ScanScreenActivity extends AppCompatActivity {
 
                     @Override
                     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                        switch (item.getItemId()){
+                        switch (item.getItemId()) {
                             case R.id.navigation_home:
                                 Intent homeIntent = new Intent(ScanScreenActivity.this, MainScreenActivity.class);
                                 homeIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -49,7 +53,8 @@ public class ScanScreenActivity extends AppCompatActivity {
                         return false;
                     }
                 });
+
+        //Other
+
     }
-
-
 }

@@ -56,5 +56,6 @@ public class ScanScreenActivity extends AppCompatActivity {
 
         //Other
 
+
     }
 }
